@@ -208,3 +208,82 @@ LinkedListTraversal(head);
 
 
 }
+
+
+
+// DELETING ELEMENT IN LINKED LIST
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+struct Node * DelAtIndex(struct Node * head,int index) {
+int i=0;   
+    
+    struct Node *p=head;
+    struct Node *q = p->next;
+    
+    while(i!=index-1){
+        p=p->next;
+        q=q->next;
+        i++;
+    }
+    
+    p->next=q->next;
+    free(q);
+    
+    
+    return head;
+}
+
+void ListTraversal(struct Node * head){
+    
+    
+    struct Node *ptr= head;
+    while (ptr!=0) {
+    printf("Element: %d\n",ptr->data);
+     ptr=ptr->next;
+    }
+    
+    
+}
+
+
+int main () {
+    
+    struct Node*head;
+    struct Node*second;
+    struct Node*third;
+    struct Node*fourth;
+    
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+    
+    head->data = 3;
+    head->next=second;
+    
+    second->data = 5;
+    second->next = third;
+    
+    third->data = 10;
+    third->next = fourth;
+    
+    fourth->data = 70;
+    fourth->next=NULL;
+    
+    printf("Before:\n");
+    ListTraversal(head);
+    
+    printf("After: \n");
+    head = DelAtIndex(head,2);
+    ListTraversal(head);
+    
+}
