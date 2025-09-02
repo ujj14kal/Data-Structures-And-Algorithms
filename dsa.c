@@ -287,3 +287,101 @@ int main () {
     ListTraversal(head);
     
 }
+
+
+
+
+// INSERTION SORT
+
+#include <stdio.h>
+
+void PrintArray (int *A, int n) {
+    int i;
+    
+    for(i=0;i<5;i++){
+        printf("%d ",A[i]);
+    }
+}
+
+void InsertSort(int *A, int n) {               // based on insertion of existing element in the array
+                                               // and then comparing and sorting it
+    
+    int i,j, key;
+    
+    for (i=1; i<=n-1;i++){
+        
+        key = A[i];
+        j=i-1;
+        
+        
+        while(j>=0 && A[j]>key ){
+            A[j+1]=A[j];
+            j--;
+        }
+        A[j+1]=key;
+        
+    }
+
+}
+
+void main () {
+    int A[5],i;
+    
+    printf("Enter 5 numbers: ");
+    
+    for(i=0;i<5;i++){
+        scanf("%d",&A[i]);
+    }
+    
+    InsertSort(A,5);
+    PrintArray(A,5);
+    
+}
+
+
+
+//SELECTION SORT
+
+#include <stdio.h>
+
+void PrintArray (int *A, int n) {
+    int i;
+    
+    for(i=0;i<5;i++){
+        printf("%d ",A[i]);
+    }
+}
+
+void SelectSort(int *A, int n) {
+    
+    int i,j,temp,indexofmin;
+    
+    for(i=0;i<n-1;i++){
+    indexofmin = i;
+    for (j=i+1; j<n;j++){
+        
+       if(A[j]<A[indexofmin]){
+           indexofmin = j;
+       }
+    }
+        temp = A[i];
+        A[i] = A[indexofmin];
+        A[indexofmin]= temp;
+    
+    } 
+}
+
+
+void main () {
+    int A[5],i;
+    
+    printf("Enter 5 numbers: ");
+    
+    for(i=0;i<5;i++){
+        scanf("%d",&A[i]);
+    }
+    
+    SelectSort(A,5);
+    PrintArray(A,5);
+    
+}
