@@ -385,3 +385,82 @@ void main () {
     PrintArray(A,5);
     
 }
+
+
+
+//Bubble Sort Linked List
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int data;
+    struct Node * next;
+};
+
+void Sort(struct Node *head) {
+    int swapped;
+    struct Node *ptr;
+    struct Node *last = NULL;  
+    
+    if (head == NULL)
+        return;
+    
+    do {
+        swapped = 0;
+        ptr = head;
+
+        while (ptr->next != last) {
+            if (ptr->data > ptr->next->data) {
+                int temp = ptr->data;
+                ptr->data = ptr->next->data;
+                ptr->next->data = temp;
+                swapped = 1;
+            }
+            ptr = ptr->next;
+        }
+        last = ptr; // The last node is already in place
+    } while (swapped);
+}
+
+
+void LinkedList(struct Node*ptr){
+    
+    while(ptr!=NULL) {
+        printf("Element = %d\n",ptr->data);
+        ptr=ptr->next;
+    }
+    
+}
+
+void main () {
+    struct Node*head;
+    struct Node*second;
+    struct Node*third;
+    struct Node*fourth;
+    
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+    
+    
+    
+    head->data = 5;
+    head->next = second;
+    
+    second->data = 21;
+    second->next = third;
+    
+    third->data = 25;
+    third->next = fourth;
+    
+    fourth->data = 20;
+    fourth->next = NULL;
+    
+    printf("Before:\n");
+    LinkedList(head);
+    Sort(head);
+    printf("\nAfter:\n");
+    LinkedList(head);
+}
