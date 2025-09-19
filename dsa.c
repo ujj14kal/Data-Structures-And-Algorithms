@@ -534,3 +534,82 @@ fourth->prev=third;
 
 LinkedList(head);
 }
+
+
+
+
+//DSA USING ARRAYS
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct stack {
+    int size;
+    int top;
+    int * arr; //POINTER ARRAY
+};
+
+int isEmpty(struct stack * ptr){
+    if(ptr->top==-1){
+        printf("The stack is empty.\n");
+        return 1;
+    }
+    else{
+       printf("The stack is not empty.\n");
+    }
+}
+
+int isFull(struct stack * ptr) {
+    if(ptr->top==ptr->size-1){
+        printf("The stack is full.\n");
+    }
+    else{printf("The stack is not full.\n");
+        return 0;
+    }
+}
+
+void push (struct stack * ptr, int val){
+    if(isFull(ptr)){
+        printf("Stack Overflow.\n");
+    }
+    else{
+        ptr->top++;
+        ptr->arr[ptr->top]=val;
+    }
+}
+
+int pop (struct stack * ptr){
+    if(isFull(ptr)){
+        printf("Stack Underflow.\n");
+        return -1;
+    }
+    else{
+        int val = ptr->arr[ptr->top];
+        ptr->top--;
+        return val;
+    }
+}
+
+void main () {
+    struct stack * sp = (struct stack*)malloc(sizeof(struct stack));
+    sp->size = 10;
+    sp->top = -1;
+    sp->arr = (int * )malloc(sp->size*sizeof(int));
+    isEmpty(sp);
+    isFull(sp);
+    printf("Stack has been created successfully.\n");
+    push(sp,87);
+    push(sp,27);
+    push(sp,37);
+    push(sp,17);
+    push(sp,97);
+    push(sp,67);
+    push(sp,47);
+    push(sp,7);
+    push(sp,67);
+    printf("%d popped from the stack.\n",pop(sp));
+    printf("%d popped from the stack.\n",pop(sp));
+    isEmpty(sp);
+    isFull(sp);
+}
