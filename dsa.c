@@ -106,7 +106,7 @@ void LinkedListTraversal(struct Node *ptr){
     }
 }
 
-void main () {
+void main () { 
     struct Node * head;
     struct Node * second;
     struct Node * third;
@@ -308,7 +308,7 @@ void InsertSort(int *A, int n) {               // based on insertion of existing
     
     int i,j, key;
     
-    for (i=1; i<=n-1;i++){
+    for (i=1; i<n ;i++){
         
         key = A[i];
         j=i-1;
@@ -463,4 +463,74 @@ void main () {
     Sort(head);
     printf("\nAfter:\n");
     LinkedList(head);
+}
+
+
+
+//DOUBLY CIRCULAR LINKED LIST
+
+// Linked List 
+
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node*next;
+    struct Node*prev;
+};
+
+
+void LinkedList(struct Node*head) {
+    
+    struct Node*ptr=head;
+    if(ptr==NULL){return;}
+    
+    printf("Forward Linked List: \n");
+    do{
+        printf("Element: %d\n",ptr->data);
+        ptr=ptr->next;
+    }while(ptr!=head);
+    
+    printf("Backward Linked List: \n");
+    ptr=ptr->prev;
+    do{
+        printf("Element: %d\n",ptr->data);
+        ptr=ptr->prev;
+    }while(ptr!=head->prev);
+    
+    
+}
+
+void main () {
+    struct Node * head;
+    struct Node * second;
+    struct Node * third;
+    struct Node*  fourth;
+    
+head=(struct Node*)malloc(sizeof(struct Node));
+second=(struct Node*)malloc(sizeof(struct Node));
+third=(struct Node*)malloc(sizeof(struct Node));
+fourth=(struct Node*)malloc(sizeof(struct Node));
+
+
+head->data = 23;
+second->data = 45;
+third->data = 30;
+fourth->data = 56;
+
+head->next=second;
+second->next=third;
+third->next=fourth;
+fourth->next=head;
+
+head->prev=fourth;
+second->prev=head;
+third->prev=second;
+fourth->prev=third;
+
+
+LinkedList(head);
 }
