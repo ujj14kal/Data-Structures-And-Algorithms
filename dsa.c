@@ -542,73 +542,86 @@ LinkedList(head);
 
 
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 
-struct stack {
+struct stack 
+{
     int size;
     int top;
     int * arr;
 };
 
-
-int isEmpty(struct stack * ptr) {
-    if(ptr->top==-1) {
-        printf("Stack is empty.\n");
-        return 1;
-    }
-    else{return 0;}
-}
-
-int isFull(struct stack*ptr) {
+int isFull(struct stack * ptr) {
     if(ptr->top==ptr->size-1){
-        printf("The stack is full.\n");
         return 1;
     }
     else{return 0;}
 }
 
-int push (struct stack *ptr, int val){
-    if(isFull(ptr)){
-        printf("Stack Overflow.\n");
+int isEmpty(struct stack * ptr){
+    if(ptr->top==-1){
         return 1;
     }
-    else {
-        ptr->top++;
-        ptr->arr[ptr->top]=val;
-        printf("%d added to stack.\n",val);
-    }
+    else{return 0;}
 }
 
-int pop (struct stack *ptr){
-    if(isEmpty(ptr)){
-        printf("Stack Underflow.\n");
+int push (struct stack * ptr,int x)
+{
+    if(isFull(ptr)){
+        printf("Stack Overflow.");
     }
     else{
-       int val = ptr->arr[ptr->top];
-       ptr->top--;
-       return val;
+        ptr->top++;
+        ptr->arr[ptr->top]=x;
+        printf("%d added to stack.\n",x);
     }
 }
 
-void main (){
+int pop (struct stack * ptr){
+    if(isEmpty(ptr)){
+        printf("Stack Underflow.");
+    }
+    else{
+        int x = ptr->arr[ptr->top];
+        ptr->top--;
+        printf("%d popped from stack.\n",x);
+        return x;
+        
+    }
+    
+}
+
+void display(struct stack *ptr) {
+    if (isEmpty(ptr)) {
+        printf("Stack is empty.\n");
+    } else {
+        printf("\nStack elements (top to bottom): \n");
+        for (int i = ptr->top; i >= 0; i--) {
+            printf("%d \n", ptr->arr[i]);
+        }
+        printf("\n");
+    }
+}
+
+void main () {
     struct stack * sp = (struct stack*)malloc(sizeof(struct stack));
     
-    sp->size=10;
+    sp->size = 10;
     sp->top=-1;
-    sp->arr = (int *)malloc(sp->size*sizeof(int));
-    printf("Stack created successfully.\n");
-    push(sp,57);
-    push(sp,43);
-    push(sp,21);
-    push(sp,20);
-    push(sp,14);
-    push(sp,3);
-    push(sp,24);
+    sp->arr = (int*)malloc(sp->size*sizeof(int));
+    
+    push(sp,47);
     push(sp,67);
-    push(sp,25);
-    push(sp,29);
-    push(sp,26);
+    push(sp,7);
+    pop(sp);
+    pop(sp);
+    pop(sp);
+    pop(sp);
+    display(sp);
+    
+    
 }
+
 
 
 
