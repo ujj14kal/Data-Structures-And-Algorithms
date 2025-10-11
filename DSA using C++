@@ -1,0 +1,23 @@
+//Basics of Datatype
+
+
+#include <iostream> // Header file for input output functions
+using namespace std;
+
+int main(){
+
+    cout<<"Ujjwal";
+    return 0;
+}
+
+
+
+#include <bits/stdc++.h>     // Inlcudes all standard libraries
+using namespace std;    // Standard namespace
+
+int main(){
+int x,y;
+    cin>>x>>y;
+    cout<<"x: "<<x<<"y: "<<y;
+    return 0;
+}
