@@ -21,3 +21,32 @@ int x,y;
     cout<<"x: "<<x<<"y: "<<y;
     return 0;
 }
+
+
+
+
+// Euclidean Algorithm to find GCD of two numbers
+
+
+// if two numbers exist (a,b) where a>b the gcd is equal to gcd of (a-b,b) or (a%b,b)
+
+class Solution {
+public:
+    int GCD(int a,int b) {
+  while(a>0 && b>0){
+      if(a>b){
+          a=a%b;
+      }
+      else{
+          b=b%a;
+      }
+  }
+  if(a==0){
+      return b;
+  }
+  else {return a;}
+}
+    };
+
+
+    
