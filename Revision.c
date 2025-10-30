@@ -602,9 +602,6 @@ int fact (int number) {
     
     else {
         return (number*fact(number-1));                       //factorial logic
-    } 
-    
-}
 
 void main () {
     int num;
