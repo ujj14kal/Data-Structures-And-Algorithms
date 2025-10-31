@@ -73,3 +73,66 @@ public:
         return -1;
     }
 };
+
+
+
+//positive numbers on even index and odd on odd index.
+
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        int n = nums.size();
+        int posIndex = 0, negIndex = 1;
+
+
+        vector<int> copy = nums;
+
+        for (int i = 0; i < n; i++) {
+            if (copy[i] > 0) {
+                nums[posIndex] = copy[i];
+                posIndex += 2;
+            } 
+            else {
+                nums[negIndex] = copy[i];
+                negIndex += 2;
+            }
+        }
+
+        return nums;
+    }
+};
+
+
+
+
+//Kadanes Algorithm to find maximum subarray sum.
+
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxi=INT_MIN;
+        int sum=0;
+        int i,start;
+        int anstart,ansend=-1;
+
+
+        for(i=0;i<nums.size();i++){
+            if(sum==0){start=i;}
+            sum+=nums[i];
+
+            if(sum>maxi){
+                maxi=sum;
+                anstart=start;
+                ansend=i;
+            }
+
+            if(sum<0){sum=0;}
+        }
+        return maxi;
+    }
+};
+
+
+
+
