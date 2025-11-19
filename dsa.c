@@ -795,6 +795,81 @@ void main(){
 }
 
 
+//Circular Queue Using Array
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct queue {
+    int size;
+    int val;
+    int f;
+    int r;
+    int *arr;
+};
+
+int isFull(struct queue *q){
+    if((q->r+1)%q->size==q->f){
+        return 1;
+    }
+    return 0;
+}
+
+int isEmpty(struct queue *q){
+    if(q->r==q->f){
+        return 1;
+    }
+    return 0;
+}
+
+void enqueue (struct queue *q, int val){
+    if(isFull(q)){
+        printf("Queue is full.\n");
+    }
+    else{
+        q->r=(q->r+1)%q->size;
+        q->arr[q->r]=val;
+    }
+}
+
+int dequeue (struct queue *q){
+    int a=-1;
+    if(isEmpty(q)){
+        printf("Queue is Empty.");
+    }
+    else{
+        q->f=(q->f+1)%q->size;
+        a=q->arr[q->f];
+    }
+    return a;
+}
+
+void display(struct queue *q){
+    int i = (q->f + 1) % q->size;
+    while (i != (q->r + 1) % q->size) {
+        printf("%d\n", q->arr[i]);
+        i = (i + 1) % q->size;
+    }
+}
+
+void main(){
+    struct queue q;
+    
+    q.size=5; //Circular queue stores n-1 elements.
+    q.f=q.r=0;
+    q.arr=(int*)malloc(q.size*sizeof(int));
+    
+
+    enqueue(&q,12);
+    enqueue(&q,1);
+    enqueue(&q,23);
+    enqueue(&q,179);
+    enqueue(&q,150);
+    
+    display(&q);
+}
+
+
 
 //Linear Queue Using Linked List
 
