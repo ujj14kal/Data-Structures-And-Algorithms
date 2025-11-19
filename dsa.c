@@ -716,3 +716,148 @@ int main(){
     
     return 0;
 }
+
+
+
+
+
+//Linear Queue Operations Using Array
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct queue {
+    int size;
+    int val;
+    int f;
+    int r;
+    int *arr;
+    
+};
+
+int isFull(struct queue *q){
+    if(q->r==q->size-1){
+        return 1;
+    }
+    return 0;
+}
+
+int isEmpty(struct queue *q){
+    if(q->r==q->f){
+        return 1;
+    }
+    return 0;
+}
+
+
+void enqueue(struct queue *q, int val){
+    if(isFull(q)){
+        printf("Queue is full.");
+    }
+    else{
+        q->r++;
+        q->arr[q->r]=val;
+    }
+}
+
+int dequeue(struct queue*q){
+    int a=-1;
+    if(isEmpty(q)){
+        printf("Queue is empty.");
+    }
+    else{
+        q->f++;
+        a=q->arr[q->f];
+    }
+    return a;
+}
+
+void Display(struct queue*q){
+    for(int i=q->f+1;i<=q->r;i++){
+        printf("Element: %d\n",q->arr[i]);
+    }
+}
+
+void main(){
+    struct queue q;
+    
+    q.size=5;
+    q.f=q.r=-1;
+    q.arr=(int*)malloc(q.size*sizeof(int));
+    
+    enqueue(&q,12);
+    enqueue(&q,2);
+    enqueue(&q,1);
+    enqueue(&q,52);
+    dequeue(&q);
+    Display(&q);
+    
+}
+
+
+
+//Linear Queue Using Linked List
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int data;
+    struct Node*next;
+    
+};
+
+struct Node*f=NULL;
+struct Node*r=NULL;
+
+
+void enqueue (int val){
+    struct Node*n=(struct Node*)malloc(sizeof(struct Node));
+    if(n==NULL){
+        printf("Queue is full.");
+    }
+    else{
+           n->data=val;
+           n->next=NULL;
+           if(f==NULL){
+               f=r=n;
+           }
+           else{
+               r->next=n;
+               r=n;
+           }
+    }
+}
+
+int dequeue(){
+    int val=-1;
+    struct Node*ptr=f;
+    if(f==NULL){
+        printf("Queue is empty.");
+    }
+    else{
+       f=f->next;
+       val=ptr->data;
+       free(ptr);
+    }
+    return val;
+}
+
+void LinkedList(struct Node*ptr){
+    while(ptr!=NULL){
+        printf("Element: %d\n",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+void main(){
+    
+    enqueue(12);
+    enqueue(2);
+    enqueue(1);
+    enqueue(52);
+    dequeue();
+    LinkedList(f);
+    
+    
+}
