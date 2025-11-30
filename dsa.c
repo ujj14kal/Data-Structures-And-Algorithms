@@ -936,3 +936,118 @@ void main(){
     
     
 }
+
+
+// BST all operations
+
+// Binary Tree All Operations
+
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node*left;
+    struct node*right;
+};
+
+void preorder(struct node*root){
+    if(root!=NULL){
+    printf("%d ",root->data);
+    preorder(root->left);
+    preorder(root->right);
+    }
+}
+
+void inorder(struct node*root){
+    if(root!=NULL){
+    inorder(root->left);
+    printf("%d ",root->data);
+    inorder(root->right);
+    }
+}
+void postorder(struct node*root){
+    if(root!=NULL){
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ",root->data);
+    }
+}
+
+struct node*createnode(int val){
+    struct node n=(struct node)malloc(sizeof(struct node));
+    n->data=val;
+    n->left=NULL;
+    n->right=NULL;
+    printf("Node %d created.\n",val);
+    return n;
+}
+
+struct node*search(struct node*root,int val){
+    struct node*prev=NULL;
+    while(root!=NULL){
+        
+        if(val==root->data){
+            printf("Found %d",val);
+            return root;
+        }
+        else if(val<root->data){
+            return search(root->left,val);
+        }
+        else {
+            return search(root->right,val);
+        }
+    }
+}
+struct node*insert(struct node*root,int val){
+    struct node*prev=NULL;
+    while(root!=NULL){
+        prev=root;
+        
+        if(val==root->data){
+            printf("Cannot insert.");
+            return prev;
+        }
+        if(val<root->data){
+            root=root->left;
+        }
+        else {
+            root=root->right;
+        }
+    }
+    struct node*newnode=createnode(val);
+    if(prev->data<val){
+        prev->right=newnode;
+    }
+    else{
+        prev->left=newnode;
+    }
+}
+
+void main(){
+    struct node*p=createnode(5);
+    struct node*p1=createnode(2);
+    struct node*p2=createnode(6);
+    struct node*p3=createnode(1);
+    struct node*p4=createnode(10);
+        
+    p->left=p1;
+    p->right=p2;
+    p1->left=p3;
+    p2->right=p4;
+    
+    insert(p,3);
+    printf("%d inserted.\n",p->left->right->data);
+    insert(p,48);
+    insert(p,7);
+    struct node*n=search(p,8);
+    if(n==NULL){
+        printf("Not found.\n");
+    }
+    preorder(p);
+    printf("\n");
+    inorder(p);
+    printf("\n");
+    postorder(p);
+    
+}
